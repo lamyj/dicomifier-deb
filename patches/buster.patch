@@ -1,0 +1,13 @@
+diff --git a/debian/rules b/debian/rules
+--- a/debian/rules
++++ b/debian/rules
+@@ -78,6 +78,9 @@ override_dh_clean:
+ 	find . -name "*pyc" -delete
+	rm -rf build-indep $(ALLPY:%=build-py%) install
+ 
++override_dh_dwz:
++	echo "Ignore dh_dwz"
++
+ # These steps are not needed for arch-independent packages
+ override_dh_auto_configure-indep:
+ override_dh_auto_test-indep:

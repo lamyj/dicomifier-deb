@@ -35,6 +35,7 @@ before_install:
   - docker run -di -v ${TRAVIS_BUILD_DIR}:${TRAVIS_BUILD_DIR} --name ${VENDOR}_${VERSION} --rm ${VENDOR}:${VERSION}
 
 script:
+  - set -e
   # WARNING: this docker-specific files causes errors in d-shlibmove when 
   # calling `apt-cache --no-generate show PKG`
   - docker exec ${VENDOR}_${VERSION} rm -f /etc/apt/apt.conf.d/docker-clean
