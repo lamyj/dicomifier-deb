@@ -19,6 +19,12 @@ ${APT_GET} install \
   adduser apt-utils curl devscripts dpkg-dev equivs gnupg libwww-perl \
   lsb-release software-properties-common sudo
 
+# Make sure the timezone is set correctly
+export DEBIAN_FRONTEND=noninteractive
+${APT_GET} install -y tzdata
+ln -fs /usr/share/zoneinfo/UTC /etc/localtime
+dpkg-reconfigure --frontend noninteractive tzdata
+
 adduser --disabled-password --gecos '' somebody
 chown -R somebody:somebody ~somebody
 echo 'somebody ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
