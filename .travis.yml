@@ -1,7 +1,7 @@
-language: minimal
+language: shell
 
 os: linux
-sudo: required
+dist: bionic
 services:
   - docker
 
@@ -13,13 +13,6 @@ env:
     - ORIG_SIG=https://github.com/lamyj/dicomifier/releases/download/v1.4.0/dicomifier_1.4.0.orig.tar.gz.asc
     - DEBIANIZATION=https://github.com/lamyj/dicomifier/releases/download/v1.4.0/dicomifier_1.4.0-1.debian.tar.xz
     - PATCH_DIR=${TRAVIS_BUILD_DIR}/patches
-    # travis encrypt AWS_ENDPOINT=$AWS_ENDPOINT
-    - secure: "lWRxffD8WDZSmNAzawyGXpQS2ma8hgpWrQrqVJdsVwgzH+6PsCPkpEnldh9PUjWxAkulQ6FjSYBXfMw8ji7wxXc4RC5kwgonbOhvwxyaEvhdWdAnyWhorTw6cPUR7GRFycjU0Dr4Y7HhEQ833nfBTbXXhv1SWdtVY557P7vOnwUW68zY8XT49Trxd693Q7F4wfSphuf3Dbwpt+bha/VjODIPJv6lk4IfzPW8kBIAmeX+I/wtE8vFSVKGbYAJ9j5ukAvP8re/F6AOWS1fSgisZtfRoSzZ7o2PtvLkSNnPo2nTmB+MRLtlTddsiiYlB0CMEsXI72qIZUuzKO+PLJDF6DMi46TPyYFs+tSGWCWdulsduMNEtTiyZTC4lIoDs8G+H28/E6+RJiOXZ/wntzVdu42nKCxqEb5SNCkFIA2UytHv1vlVXj2M7z8vcPPJqWWec1RshiXBiYutVuOpG7p0saYjUgqdHauvf7Bt4m6gBt1wR3yF+Mi5yuBvyrw+H+QcfCeBceHlAiSsIvRb4AXqIwWgtAmc/KJc7W24fH7oQnulugSFmn1+LDiZAy1DTcV/eRkNkT+FuVHmyVqI4KWRC4Mf1GZITepeVtMab8SJoGQ7S3UfHdFbRAGmn5jscSyf8DTZ6MKOOhAZZC4B/KcPX8ZRD7n93pqMwIJeNIep3Gw="
-    # travis encrypt AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-    - secure: "xBt3I5f7qbIeM5ED4lPWoKkseaJqKzquA6PjK0WNzvQLekVOEmLzBD1TWeA/NPEuJhFtR2b69oOwuKpsVT2mJw+bq41PGAg9ZFDpwxgE/e7KI+6TiIX9EYBEbCSJhvEcqMQMVjIUrPsrAV/oWBhOznP+O94Z66+MBiMX0uQ22p/mdsCfgwj74jV3h41yLIz9GEK+H8eUpnugVQAtgU9lNoZFFrDkm62QQHvB9KGLZEoD/aXAuRHaV7E3wCrM1Feuo0mtdbYbpKKGTWhfV/jQbgj7jWUBMe0bBf5rHUJnWLaO6Mlx6knGsKTUCJvIV8Pv3SLS635P4a4ci8N3AUEZe70EYppnd9tQDigBbMRpR8kb2P2jEoFtE6H0qDwILqEDQZDAzTYKRV1CaagvLoZNXrH+2z1j6ah7OGVJ6pZa0bF3u50+9IeCF1g5XZR4spYdG8tzRKzizdAUgYbFCKz5MZFTtg5qZSR3AbUFhoBox9xP6SCLZxytHUI0hiNd4pIrhZFcuCCuPt64k2Yn9lFWkU3g6enfLudd6BIYt15h/lXxoakbtErfzki3KNjT/5P5dx/5lINbt3VS2RNz5WsnL/gwPL6GywVfoWM4/tGY+ioDrBpwAnweFpelno+oANlWGUOukgYlZ+Aolse1P2qMT2pu9ZaLIfMmvrrZtDC0BXc="
-    # travis encrypt AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-    - secure: "NCju1iZrO2JI0Hq2uRIU9kEDnzCZGzwbBdYlD7TK6aWLf41MwXcdqso9kDQte0cYD+ZuPNU86T3LzXZ1zo/FjAImcWmXKYOVHsnjouXrlZiT0OWqaLY5IaxMUk4w580IT6vbMMfitEOGnTcxXZH++tNmBD4RP8/peV02SgPEEyS8+3Nx04IREghYCxn71V6HaiiSHvEeR8NlZT5RZC24yhxwGxdPVHyCq067D37gOtS53Vr/z0bzK2VcZ1Mq5mcRlMkis1mkg7v0oT69beZWFf48cGQ8wGielYqiwzWIB/0Zkg2Z8IP9SjbFbO9shVEHjRMWM+TJDK1IhudWBo0YVPP/MQIq33ppY1ZOuBbzl6gQrIrWnSsXEMqLiITWvR8PrFDziwgTq8WlhSyiI/PgTAhTWW1Y9L/DMxXLvWOyWLBCpmA1D909qTQcHOdqaTZZXnKmwLjvQ6mQZFrK82/e6z+RgHUDRtbhCwdKlC75zFisE5SmpVuD0cZhUSfRPN5L5xh1Q9utxyJnm/rElQeKuOC2lS7bq4ApiUwfwoIVRRNNf/ci8tJM6aMbG8DugD95mNdS5pjoyDK9xnYr7XJeJwcD3Nsor+AzzHhTQpNYM1aoAu9d6/Nl5HOzbFcqi/vXEBZuaEfCOMc2BKlcipsmTMxnafuUmubMuoEA8CfOSjg="
-
 jobs:
   include:
     - name: "Debian 9 (Stretch)"
@@ -51,10 +44,7 @@ after_success:
   - docker kill ${VENDOR}_${VERSION}
 
 deploy:
+  edge: true
   provider: s3
-  endpoint: $AWS_ENDPOINT
-  access_key_id: $AWS_ACCESS_KEY_ID
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
-  bucket: odil-deb
+  bucket: dicomifier-deb
   local_dir: packages
-  skip_cleanup: true
