@@ -1,0 +1,43 @@
+diff --git a/debian/control b/debian/control
+--- a/debian/control
++++ b/debian/control
+@@ -3,11 +3,11 @@ Maintainer: Julien Lamy <lamy@unistra.fr>
+ Section: science
+ Testsuite: autopkgtest-pkg-python
+ Priority: optional
+-Build-Depends: debhelper-compat (= 12),
++Build-Depends: debhelper (>= 9),
+                d-shlibs,
+                dh-python,
+                cmake,
+-               g++ (>= 4:7),
++               g++ (>= 4:5),
+                pkg-config,
+                libboost-date-time-dev,
+                libboost-exception-dev,
+diff --git a/debian/rules b/debian/rules
+index 9d5a18b..193fc83 100755
+--- a/debian/rules
++++ b/debian/rules
+@@ -1,6 +1,6 @@
+ #!/usr/bin/make -f
+ 
+-export DEB_BUILD_MAINT_OPTIONS = hardening=+all
++export DEB_BUILD_MAINT_OPTIONS = hardening=+all,-pie
+ 
+ # needed for the tests
+ export DICOMIFIER_TEST_DATA=$(CURDIR)/tests/data
+@@ -10,7 +10,7 @@ PYTHON3=$(shell py3versions -vd)
+ ALLPY=${PYTHON3}
+ 
+ %:
+-	dh $@ --builddirectory=build --with python3
++	dh $@ --builddirectory=build --with python3 --parallel
+ 
+ override_dh_auto_configure-arch:
+ 
+diff --git a/debian/compat b/debian/compat
+--- /dev/null
++++ b/debian/compat
+@@ -0,0 +1 @@
++9
