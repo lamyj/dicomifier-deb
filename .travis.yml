@@ -22,8 +22,8 @@ env:
 
 jobs:
   include:
-    # - name: "Debian 9 (Stretch)"
-    #   env: [VENDOR=debian, VERSION=stretch]
+    - name: "Debian 9 (Stretch)"
+      env: [VENDOR=debian, VERSION=stretch]
     - name: "Debian 10 (Buster)"
       env: [VENDOR=debian, VERSION=buster]
     # - name: "Ubuntu 16.04 (Xenial Xerus)"
