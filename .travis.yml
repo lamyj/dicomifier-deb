@@ -8,10 +8,10 @@ services:
 env:
   global:
     - BACKPORTER="Julien Lamy <lamy@unistra.fr>"
-    - DSC=https://github.com/lamyj/dicomifier/releases/download/v1.4.0/dicomifier_1.4.0-1.dsc
-    - ORIG=https://github.com/lamyj/dicomifier/releases/download/v1.4.0/dicomifier_1.4.0.orig.tar.gz
-    - ORIG_SIG=https://github.com/lamyj/dicomifier/releases/download/v1.4.0/dicomifier_1.4.0.orig.tar.gz.asc
-    - DEBIANIZATION=https://github.com/lamyj/dicomifier/releases/download/v1.4.0/dicomifier_1.4.0-1.debian.tar.xz
+    - DSC=https://github.com/lamyj/dicomifier/releases/download/v2.0.0/dicomifier_2.0.0-1.dsc
+    - ORIG=https://github.com/lamyj/dicomifier/releases/download/v2.0.0/dicomifier_2.0.0.orig.tar.gz
+    - ORIG_SIG=https://github.com/lamyj/dicomifier/releases/download/v2.0.0/dicomifier_2.0.0.orig.tar.gz.asc
+    - DEBIANIZATION=https://github.com/lamyj/dicomifier/releases/download/v2.0.0/dicomifier_2.0.0-1.debian.tar.xz
     - PATCH_DIR=${TRAVIS_BUILD_DIR}/patches
 jobs:
   include:
@@ -23,6 +23,8 @@ jobs:
       env: [VENDOR=ubuntu, VERSION=xenial]
     - name: "Ubuntu 18.04 (Bionic Beaver)"
       env: [VENDOR=ubuntu, VERSION=bionic]
+    - name: "Ubuntu 20.04 (Focal Fossa)"
+      env: [VENDOR=ubuntu, VERSION=focal]
 
 before_install:
   - docker run -di -v ${TRAVIS_BUILD_DIR}:${TRAVIS_BUILD_DIR} --name ${VENDOR}_${VERSION} --rm ${VENDOR}:${VERSION}
