@@ -14,16 +14,17 @@ done
 APT_GET="apt-get -y --no-install-recommends"
 
 apt-get update
-apt-get upgrade -y
-${APT_GET} install \
-  adduser apt-utils build-essential curl devscripts dpkg-dev equivs gnupg \
-  libwww-perl lsb-release software-properties-common sudo
 
 # Make sure the timezone is set correctly
 export DEBIAN_FRONTEND=noninteractive
 ${APT_GET} install -y tzdata
 ln -fs /usr/share/zoneinfo/UTC /etc/localtime
 dpkg-reconfigure --frontend noninteractive tzdata
+
+apt-get upgrade -y
+${APT_GET} install \
+  adduser apt-utils build-essential curl devscripts dpkg-dev equivs gnupg \
+  libwww-perl lsb-release software-properties-common sudo
 
 adduser --disabled-password --gecos '' somebody
 chown -R somebody:somebody ~somebody
