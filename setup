@@ -16,7 +16,7 @@ APT_GET="apt-get -y --no-install-recommends"
 apt-get update
 apt-get upgrade -y
 ${APT_GET} install \
-  adduser apt-utils build-essentian curl devscripts dpkg-dev equivs gnupg \
+  adduser apt-utils build-essential curl devscripts dpkg-dev equivs gnupg \
   libwww-perl lsb-release software-properties-common sudo
 
 # Make sure the timezone is set correctly
