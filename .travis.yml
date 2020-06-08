@@ -8,10 +8,10 @@ services:
 env:
   global:
     - BACKPORTER="Julien Lamy <lamy@unistra.fr>"
-    - DSC=https://github.com/lamyj/dicomifier/releases/download/v2.0.0/dicomifier_2.0.0-1.dsc
+    - DSC=https://github.com/lamyj/dicomifier/releases/download/v2.0.0/dicomifier_2.0.0-2.dsc
     - ORIG=https://github.com/lamyj/dicomifier/releases/download/v2.0.0/dicomifier_2.0.0.orig.tar.gz
     - ORIG_SIG=https://github.com/lamyj/dicomifier/releases/download/v2.0.0/dicomifier_2.0.0.orig.tar.gz.asc
-    - DEBIANIZATION=https://github.com/lamyj/dicomifier/releases/download/v2.0.0/dicomifier_2.0.0-1.debian.tar.xz
+    - DEBIANIZATION=https://github.com/lamyj/dicomifier/releases/download/v2.0.0/dicomifier_2.0.0-2.debian.tar.xz
     - PATCH_DIR=${TRAVIS_BUILD_DIR}/patches
 jobs:
   include:

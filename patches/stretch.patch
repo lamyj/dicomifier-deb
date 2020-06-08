@@ -1,12 +1,7 @@
 diff --git a/debian/control b/debian/control
 --- a/debian/control
 +++ b/debian/control
-@@ -3,11 +3,11 @@ Maintainer: Julien Lamy <lamy@unistra.fr>
- Section: science
- Testsuite: autopkgtest-pkg-python
- Priority: optional
--Build-Depends: debhelper-compat (= 12),
-+Build-Depends: debhelper (>= 10),
+@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 9),
                 d-shlibs,
                 dh-python,
                 cmake,
@@ -15,8 +10,3 @@ diff --git a/debian/control b/debian/control
                 pkg-config,
                 libboost-date-time-dev,
                 libboost-exception-dev,
-diff --git a/debian/compat b/debian/compat
---- /dev/null
-+++ b/debian/compat
-@@ -0,0 +1 @@
-+10
