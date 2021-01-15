@@ -1,0 +1,59 @@
+name: Build
+on: push
+
+env:
+  BACKPORTER: "Julien Lamy <lamy@unistra.fr>"
+  REPOSITORY: https://github.com/lamyj/dicomifier.git/
+  TAG: debian/0.12.1-1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: "Debian 9 (Stretch)"
+            vendor: debian
+            version: stretch
+          - name: "Debian 10 (Buster)"
+            vendor: debian
+            version: buster
+          - name: "Ubuntu 18.04 (Bionic Beaver)"
+            vendor: ubuntu
+            version: bionic
+          - name: "Ubuntu 20.04 (Focal Fossa)"
+            vendor: ubuntu
+            version: focal
+    steps:
+      - name: Configure environment
+        run: |
+          echo 'VENDOR=${{ matrix.vendor }}' >> $GITHUB_ENV
+          echo 'VERSION=${{ matrix.version }}' >> $GITHUB_ENV
+      - name: Checkout latest revision
+        uses: actions/checkout@v2
+      - name: Prepare the container
+        run: |
+          docker run -di -v ${GITHUB_WORKSPACE}:${GITHUB_WORKSPACE} --name ${VENDOR}_${VERSION} --rm ${VENDOR}:${VERSION}
+          # WARNING: this docker-specific files causes errors in d-shlibmove when 
+          # calling `apt-cache --no-generate show PKG`
+          docker exec ${VENDOR}_${VERSION} rm -f /etc/apt/apt.conf.d/docker-clean
+          docker exec ${VENDOR}_${VERSION} ${GITHUB_WORKSPACE}/setup -u
+      - name: Prepare the build environment
+        run: docker exec -w /home/somebody -u somebody -e REPOSITORY=${REPOSITORY} -e TAG=${TAG} -e PATCH_DIR=${GITHUB_WORKSPACE}/patches ${VENDOR}_${VERSION} ${GITHUB_WORKSPACE}/prepare
+      - name: Build the packages
+        run: docker exec -w /home/somebody -u somebody -e BACKPORTER="${BACKPORTER}" ${VENDOR}_${VERSION} ${GITHUB_WORKSPACE}/build
+      - name: Check the packages
+        run: docker exec -w /home/somebody -u somebody ${VENDOR}_${VERSION} ${GITHUB_WORKSPACE}/check
+      - name: Prepare for upload
+        run: |
+          docker exec -w ${GITHUB_WORKSPACE} ${VENDOR}_${VERSION} mkdir packages
+          docker exec -w ${GITHUB_WORKSPACE} ${VENDOR}_${VERSION} sh -c 'mv /home/somebody/*deb ./packages'
+      - name: Destroy container
+        run: docker kill ${VENDOR}_${VERSION}
+      - name: Upload packages
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.vendor}}_${{ matrix.version }}
+          path: packages/

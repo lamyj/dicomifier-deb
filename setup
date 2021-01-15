@@ -23,7 +23,7 @@ dpkg-reconfigure --frontend noninteractive tzdata
 
 apt-get upgrade -y
 ${APT_GET} install \
-  adduser apt-utils build-essential curl devscripts dpkg-dev equivs gnupg \
+  adduser apt-utils build-essential curl devscripts dpkg-dev equivs git gnupg \
   libwww-perl lsb-release software-properties-common sudo
 
 adduser --disabled-password --gecos '' somebody
