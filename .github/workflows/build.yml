@@ -4,7 +4,7 @@ on: push
 env:
   BACKPORTER: "Julien Lamy <lamy@unistra.fr>"
   REPOSITORY: https://github.com/lamyj/dicomifier.git/
-  TAG: debian/2.0.4-1
+  TAG: debian/2.0.5-1
 
 jobs:
   build:
